@@ -1,3 +1,8 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS applications CASCADE;
+DROP TYPE IF EXISTS application_status;
+
+
 CREATE TYPE application_status AS ENUM ('applied','interviewing','offer','rejected');
 
 CREATE TABLE users (
@@ -23,3 +28,5 @@ CREATE TABLE applications (
         ON DELETE CASCADE
     
 );
+
+CREATE INDEX user_applications ON applications(user_id);
