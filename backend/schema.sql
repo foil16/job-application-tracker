@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS applications CASCADE;
+DROP TABLE IF EXISTS applications;
+DROP TABLE IF EXISTS users;
 DROP TYPE IF EXISTS application_status;
 
 
@@ -29,4 +29,4 @@ CREATE TABLE applications (
     
 );
 
-CREATE INDEX user_applications ON applications(user_id);
+CREATE INDEX idx_applications_user_id ON applications(user_id);
