@@ -8,6 +8,10 @@ dependencies = [
     "psycopg2>=2.9.13",
     "pwdlib[argon2,bcrypt]>=0.3.1",
     "pydantic[email]>=2.13.5",
+<<<<<<< HEAD
     "pyjwt>=2.15.0",
+=======
+    "python-dotenv>=1.2.3",
+>>>>>>> 32bd5f959b2b2dbcbe54e15c3a176ac5b9c0d484
     "python-multipart>=0.0.32",
 ]
