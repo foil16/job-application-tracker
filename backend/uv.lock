@@ -105,6 +105,7 @@ dependencies = [
     { name = "psycopg" },
     { name = "pwdlib", extra = ["argon2", "bcrypt"] },
     { name = "pydantic", extra = ["email"] },
+    { name = "python-dotenv" },
     { name = "python-multipart" },
 ]
 
@@ -114,6 +115,7 @@ requires-dist = [
     { name = "psycopg", specifier = ">=3.3.6" },
     { name = "pwdlib", extras = ["argon2", "bcrypt"], specifier = ">=0.3.1" },
     { name = "pydantic", extras = ["email"], specifier = ">=2.13.5" },
+    { name = "python-dotenv", specifier = ">=1.2.3" },
     { name = "python-multipart", specifier = ">=0.0.32" },
 ]
 
