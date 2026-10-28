@@ -1,19 +1,11 @@
-from fastapi import FastAPI, status
-from pydantic import BaseModel, EmailStr, Field
-from datetime import datetime
-from auth import register_user
+from fastapi import FastAPI, status, Depends
+from auth import register_user,login_user, get_current_user
+from schemas import RegisterRequest, LoginRequest, Token, UserResponse
 
 
 app = FastAPI()
 
-class RegisterRequest(BaseModel):
-    email: EmailStr
-    password : str = Field(...,min_length = 8)
 
-class RegisterResponse(BaseModel):
-    id : int
-    email: EmailStr
-    created_at: datetime
 
 
 
@@ -22,10 +14,22 @@ class RegisterResponse(BaseModel):
 async def health():
     return {"status":"ok"}
 
-@app.post("/auth/register",status_code=status.HTTP_201_CREATED)
+@app.post("/auth/register",status_code=status.HTTP_201_CREATED,response_model=UserResponse)
 def register(data: RegisterRequest):
-    registerResponse = register_user(data.email.lower(),data.password)
-    return RegisterResponse(id = registerResponse[0], email = registerResponse[1],created_at=registerResponse[2])
+    register_response = register_user(data.email,data.password)
+    return register_response
+
+@app.post("/auth/login",status_code = status.HTTP_200_OK, response_model= Token)
+def login(data: LoginRequest):
+    login_response = login_user(data.email,data.password)
+    return Token(access_token=login_response,token_type = "Bearer")
+
+@app.get("/users/me",status_code=status.HTTP_200_OK, response_model=UserResponse)
+def read_me(current_user = Depends(get_current_user)):
+    return current_user
     
+
+
+
     
 
